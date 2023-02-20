@@ -234,10 +234,6 @@ if __name__ == "__main__":
     inbound = 'pranav_nikam/Use_Case_2/Inbound/'
     landing = 'pranav_nikam/Use_Case_2/Landing/'
     temp_dir = 'pranav_nikam/Use_Case_2/Temp/'
-
-    bucket = 'saama-gene-training-data-bucket' # your s3 bucket name
-    prefix = 'pranav_nikam/Use_Case_2/Inbound/' # the prefix for the objects that you want to unzip
-    unzip_prefix = 'pranav_nikam/Use_Case_2/Temp/' # the location where you want to store your unzipped files 
     
     source = 'pranav_nikam/Use_Case_2/Temp'
     target = 'pranav_nikam/Use_Case_2/Landing'
@@ -247,7 +243,7 @@ if __name__ == "__main__":
     my_bucket = s3_resource.Bucket(bucket)
     foldername_list = set()
       
-    convert_zip_to_csv_gz(bucket,prefix,unzip_prefix)
+    convert_zip_to_csv_gz(bucket,inbound,temp_dir)
     foldername_list = convert_to_csv(bucket,source,target,my_bucket)
     create_athena_table(bucket,landing,foldername_list)
     move_to_archive(bucket,landing, temp_dir)
