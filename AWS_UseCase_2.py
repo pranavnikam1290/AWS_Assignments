@@ -243,10 +243,10 @@ if __name__ == "__main__":
     my_bucket = s3_resource.Bucket(bucket)
     foldername_list = set()
       
-    convert_zip_to_csv_gz(bucket,inbound,temp_dir)
-    foldername_list = convert_to_csv(bucket,source,target,my_bucket)
-    create_athena_table(bucket,landing,foldername_list)
-    move_to_archive(bucket,landing, temp_dir)
+    convert_zip_to_csv_gz(bucket,inbound,temp_dir) #Function to convert zip to csv.gz files
+    foldername_list = convert_to_csv(bucket,source,target,my_bucket) #Function to convert csv.gz file to csv file and return a folders list
+    create_athena_table(bucket,landing,foldername_list) #Function to create athena table and run crawlers
+    move_to_archive(bucket,landing, temp_dir) #Function to move old files to archive folder
 
 
 #job.commit()
